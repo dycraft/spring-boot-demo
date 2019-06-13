@@ -11,11 +11,13 @@ public enum ErrorCode {
 
     BAD_REQUEST(HttpStatus.BAD_REQUEST),
 
+    FILE_IO_ERROR(HttpStatus.INTERNAL_SERVER_ERROR),
+
     RESOURCE_NOT_FOUND(HttpStatus.NOT_FOUND);
 
     private final HttpStatus status;
 
-    private ErrorCode(final HttpStatus status) {
+    ErrorCode(final HttpStatus status) {
         this.status = status;
     }
 
