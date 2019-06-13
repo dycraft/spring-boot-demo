@@ -11,6 +11,10 @@ public enum ErrorCode {
 
     BAD_REQUEST(HttpStatus.BAD_REQUEST),
 
+    FORBIDDEN(HttpStatus.FORBIDDEN),
+
+    UNAUTHORIZED(HttpStatus.UNAUTHORIZED),
+
     FILE_IO_ERROR(HttpStatus.INTERNAL_SERVER_ERROR),
 
     RESOURCE_NOT_FOUND(HttpStatus.NOT_FOUND);

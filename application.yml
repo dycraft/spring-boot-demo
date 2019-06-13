@@ -5,3 +5,8 @@ spring:
     username: sa
     password:
   file-root: resources/
+
+jwt:
+  issuer: spring-boot-demo
+  secret: io.dycraft
+  expires-in: 120 # in minutes
