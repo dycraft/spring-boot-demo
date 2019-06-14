@@ -1,7 +1,6 @@
 package io.dycraft.samples.springbootdemo.service;
 
 import io.dycraft.samples.springbootdemo.model.Note;
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +9,7 @@ import java.util.Optional;
  */
 public interface NoteService {
 
-    List<Note> list();
+    List<Note> listByUserId(Long userId);
 
     Optional<Note> getById(Long id);
 

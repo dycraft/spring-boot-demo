@@ -14,6 +14,8 @@ public class NoteResponseDTO {
 
     private Long id;
 
+    private Long userId;
+
     private String title;
 
     private String content;
@@ -22,6 +24,7 @@ public class NoteResponseDTO {
 
     public NoteResponseDTO(Note note) {
         this.id = note.getId();
+        this.userId = note.getUserId();
         this.title = note.getTitle();
         this.content = note.getContent();
         this.createdAt = note.getCreatedAt();

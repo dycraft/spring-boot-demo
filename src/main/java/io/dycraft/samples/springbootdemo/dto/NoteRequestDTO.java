@@ -18,16 +18,18 @@ public class NoteRequestDTO {
     @NotBlank
     private String content;
 
-    public Note toEntity() {
+    public Note toEntity(Long userId) {
         Note note = new Note();
+        note.setUserId(userId);
         note.setTitle(title);
         note.setContent(content);
         return note;
     }
 
-    public Note toEntity(Long id) {
+    public Note toEntity(Long userId, Long id) {
         Note note = new Note();
         note.setId(id);
+        note.setUserId(userId);
         note.setTitle(title);
         note.setContent(content);
         return note;

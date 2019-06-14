@@ -33,7 +33,8 @@ public class NoteController {
 
     @GetMapping
     List<NoteResponseDTO> listNotes(@AuthenticationPrincipal Identity identity) {
-        return noteService.list().stream().map(NoteResponseDTO::new).collect(Collectors.toList());
+        return noteService.listByUserId(identity.getUserId()).stream().map(NoteResponseDTO::new)
+            .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
@@ -44,14 +45,16 @@ public class NoteController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    void addNote(@Valid @RequestBody NoteRequestDTO noteRequestDTO) {
-        noteService.create(noteRequestDTO.toEntity());
+    void addNote(@AuthenticationPrincipal Identity identity,
+        @Valid @RequestBody NoteRequestDTO noteRequestDTO) {
+        noteService.create(noteRequestDTO.toEntity(identity.getUserId()));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    void updateNote(@PathVariable Long id, @Valid @RequestBody NoteRequestDTO noteRequestDTO) {
-        noteService.update(noteRequestDTO.toEntity(id));
+    void updateNote(@AuthenticationPrincipal Identity identity,
+        @PathVariable Long id, @Valid @RequestBody NoteRequestDTO noteRequestDTO) {
+        noteService.update(noteRequestDTO.toEntity(identity.getUserId(), id));
     }
 
     @DeleteMapping("/{id}")
