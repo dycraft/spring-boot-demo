@@ -15,6 +15,8 @@ public enum ErrorCode {
 
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED),
 
+    DUPLICATE_KEY(HttpStatus.CONFLICT),
+
     FILE_IO_ERROR(HttpStatus.INTERNAL_SERVER_ERROR),
 
     RESOURCE_NOT_FOUND(HttpStatus.NOT_FOUND);
