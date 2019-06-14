@@ -1,18 +1,18 @@
 package io.dycraft.samples.springbootdemo.security;
 
+import java.util.ArrayList;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  * @author Dayang Li on 13/06/2019
  */
 public class JwtTokenBasedAuthentication extends AbstractAuthenticationToken {
 
-    private final UserDetails principal;
+    private final Identity principal;
     private String token;
 
-    public JwtTokenBasedAuthentication(UserDetails principal, String token) {
-        super(principal.getAuthorities());
+    public JwtTokenBasedAuthentication(Identity principal, String token) {
+        super(new ArrayList<>());
         this.principal = principal;
         this.token = token;
         super.setAuthenticated(true);
@@ -24,7 +24,7 @@ public class JwtTokenBasedAuthentication extends AbstractAuthenticationToken {
     }
 
     @Override
-    public UserDetails getPrincipal() {
+    public Identity getPrincipal() {
         return principal;
     }
 }

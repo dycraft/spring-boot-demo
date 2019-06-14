@@ -3,12 +3,14 @@ package io.dycraft.samples.springbootdemo.api;
 import io.dycraft.samples.springbootdemo.dto.NoteRequestDTO;
 import io.dycraft.samples.springbootdemo.dto.NoteResponseDTO;
 import io.dycraft.samples.springbootdemo.exception.ResourceNotFoundException;
+import io.dycraft.samples.springbootdemo.security.Identity;
 import io.dycraft.samples.springbootdemo.service.NoteService;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,7 +32,7 @@ public class NoteController {
     private final NoteService noteService;
 
     @GetMapping
-    List<NoteResponseDTO> listNotes() {
+    List<NoteResponseDTO> listNotes(@AuthenticationPrincipal Identity identity) {
         return noteService.list().stream().map(NoteResponseDTO::new).collect(Collectors.toList());
     }
 

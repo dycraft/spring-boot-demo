@@ -6,11 +6,12 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import io.dycraft.samples.springbootdemo.exception.ResourceNotFoundException;
+import io.dycraft.samples.springbootdemo.model.User;
+import io.dycraft.samples.springbootdemo.service.UserService;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 /**
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtTokenProvider {
 
-    private final UserDetailsService userDetailsService;
+    private final UserService userService;
 
     private String issuer;
 
@@ -27,13 +28,14 @@ public class JwtTokenProvider {
 
     private Algorithm algorithm;
 
-    public JwtTokenProvider(@Value("${jwt.secret}") String secret, @Value("${jwt.issuer}") String issuer,
-        @Value("${jwt.expires-in}") Long expiresIn, UserDetailsService userDetailsService) {
+    public JwtTokenProvider(@Value("${jwt.secret}") String secret,
+        @Value("${jwt.issuer}") String issuer,
+        @Value("${jwt.expires-in}") Long expiresIn, UserService userService) {
 
         this.issuer = issuer;
         this.expiresIn = expiresIn;
         this.algorithm = Algorithm.HMAC512(secret);
-        this.userDetailsService = userDetailsService;
+        this.userService = userService;
     }
 
     public String generateToken(String identity) {
@@ -68,7 +70,8 @@ public class JwtTokenProvider {
         }
     }
 
-    public static String resolveAuthorization(String bearerToken) throws InvalidAuthorizationException {
+    public static String resolveAuthorization(String bearerToken)
+        throws InvalidAuthorizationException {
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
             return bearerToken.substring(7);
         } else {
@@ -78,7 +81,11 @@ public class JwtTokenProvider {
 
     public Authentication getAuthentication(String token) {
         String username = getSubject(token);
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        return new JwtTokenBasedAuthentication(userDetails, token);
+        User user = userService.getByUsername(username)
+            .orElseThrow(() -> new ResourceNotFoundException("user", username));
+        Identity identity = new Identity();
+        identity.setUserId(user.getId());
+        identity.setUsername(username);
+        return new JwtTokenBasedAuthentication(identity, token);
     }
 }
