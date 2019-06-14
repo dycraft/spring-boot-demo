@@ -11,6 +11,8 @@ public enum ErrorCode {
 
     BAD_REQUEST(HttpStatus.BAD_REQUEST),
 
+    INVALID_PARAMETER(HttpStatus.BAD_REQUEST),
+
     FORBIDDEN(HttpStatus.FORBIDDEN),
 
     UNAUTHORIZED(HttpStatus.UNAUTHORIZED),

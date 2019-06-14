@@ -8,14 +8,14 @@ import io.dycraft.samples.springbootdemo.error.ErrorCode;
 public class InvalidParameterException extends ResponseCodeException {
 
     public InvalidParameterException() {
-        super(ErrorCode.BAD_REQUEST, "Invalid parameter");
+        super(ErrorCode.INVALID_PARAMETER, "Invalid parameter");
     }
 
     public InvalidParameterException(String message) {
-        super(ErrorCode.BAD_REQUEST, message);
+        super(ErrorCode.INVALID_PARAMETER, message);
     }
 
     public InvalidParameterException(String message, Throwable cause) {
-        super(ErrorCode.DUPLICATE_KEY, message, cause);
+        super(ErrorCode.INVALID_PARAMETER, message, cause);
     }
 }
