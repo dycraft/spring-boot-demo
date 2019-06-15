@@ -4,7 +4,7 @@ import io.dycraft.samples.springbootdemo.exception.InvalidParameterException;
 import io.dycraft.samples.springbootdemo.security.JwtTokenProvider;
 import io.dycraft.samples.springbootdemo.service.AuthService;
 import io.dycraft.samples.springbootdemo.service.UserService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
     private final UserService userService;

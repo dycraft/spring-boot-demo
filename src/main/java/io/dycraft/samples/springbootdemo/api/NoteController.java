@@ -8,7 +8,7 @@ import io.dycraft.samples.springbootdemo.service.NoteService;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.validation.Valid;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/notes")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class NoteController {
 
     private final NoteService noteService;

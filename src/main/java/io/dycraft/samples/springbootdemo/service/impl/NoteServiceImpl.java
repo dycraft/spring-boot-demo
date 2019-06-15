@@ -6,14 +6,14 @@ import io.dycraft.samples.springbootdemo.repository.NoteRepository;
 import io.dycraft.samples.springbootdemo.service.NoteService;
 import java.util.List;
 import java.util.Optional;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
  * @author Dayang Li on 12/06/2019
  */
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class NoteServiceImpl implements NoteService {
 
     private final NoteRepository noteRepository;

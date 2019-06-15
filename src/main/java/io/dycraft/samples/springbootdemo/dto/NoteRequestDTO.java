@@ -2,14 +2,12 @@ package io.dycraft.samples.springbootdemo.dto;
 
 import io.dycraft.samples.springbootdemo.model.Note;
 import javax.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * @author Dayang Li on 12/06/2019
  */
-@Getter
-@Setter
+@Data
 public class NoteRequestDTO {
 
     @NotBlank

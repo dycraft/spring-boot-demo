@@ -5,9 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
@@ -15,8 +14,7 @@ import org.hibernate.annotations.GenerationTime;
  * @author Dayang Li on 12/06/2019
  */
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 public class Note {
 
