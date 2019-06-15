@@ -1,6 +1,7 @@
 package io.dycraft.samples.springbootdemo.service;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -8,7 +9,7 @@ import java.io.InputStream;
  */
 public interface FileService {
 
-    String uploadFile(String filename, InputStream fileContent);
+    String uploadFile(String filename, InputStream fileContent) throws IOException;
 
-    File downloadFile(String fileKey);
+    File downloadFile(String fileKey) throws IOException;
 }

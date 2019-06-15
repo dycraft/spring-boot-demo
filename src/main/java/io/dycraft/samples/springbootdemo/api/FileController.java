@@ -1,11 +1,11 @@
 package io.dycraft.samples.springbootdemo.api;
 
-import io.dycraft.samples.springbootdemo.exception.FileIOException;
 import io.dycraft.samples.springbootdemo.service.FileService;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import lombok.Cleanup;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
@@ -34,28 +34,16 @@ public class FileController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    void uploadFile(MultipartFile file) {
+    void uploadFile(MultipartFile file) throws IOException {
         String filename = file.getOriginalFilename();
-        InputStream inputStream;
-        try {
-            inputStream = file.getInputStream();
-        } catch (IOException ex) {
-            log.error("An error occurs uploading MultipartFile " + filename, ex);
-            throw new FileIOException(filename);
-        }
+        @Cleanup InputStream inputStream = file.getInputStream();
         fileService.uploadFile(filename, inputStream);
     }
 
     @GetMapping("/{key}")
-    ResponseEntity downloadFile(@PathVariable String key) {
+    ResponseEntity downloadFile(@PathVariable String key) throws IOException {
         File file = fileService.downloadFile(key);
-        InputStream inputStream;
-        try {
-            inputStream = new FileInputStream(file);
-        } catch (IOException ex) {
-            log.error("An error occurs downloading File " + file.getName(), ex);
-            throw new FileIOException(file.getName());
-        }
+        @Cleanup InputStream inputStream = new FileInputStream(file);
         Resource resource = new InputStreamResource(inputStream);
         return ResponseEntity.ok()
             .contentLength(file.length())

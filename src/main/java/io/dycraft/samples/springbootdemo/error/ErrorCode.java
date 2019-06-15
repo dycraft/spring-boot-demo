@@ -19,8 +19,6 @@ public enum ErrorCode {
 
     DUPLICATE_KEY(HttpStatus.CONFLICT),
 
-    FILE_IO_ERROR(HttpStatus.INTERNAL_SERVER_ERROR),
-
     RESOURCE_NOT_FOUND(HttpStatus.NOT_FOUND);
 
     private final HttpStatus status;
