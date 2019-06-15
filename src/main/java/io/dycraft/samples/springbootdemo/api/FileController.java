@@ -35,9 +35,8 @@ public class FileController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     void uploadFile(MultipartFile file) throws IOException {
-        String filename = file.getOriginalFilename();
         @Cleanup InputStream inputStream = file.getInputStream();
-        fileService.uploadFile(filename, inputStream);
+        fileService.uploadFile(file.getOriginalFilename(), inputStream);
     }
 
     @GetMapping("/{key}")

@@ -36,14 +36,14 @@ public class FileServiceImpl implements FileService {
         @Cleanup OutputStream outputStream = new FileOutputStream(path);
         outputStream.write(buffer);
 
-        log.info("Uploading ${filename} success, resource name ${newFilename}");
+        log.info("Uploading file ${filename} success, resource name: ${newFilename}");
         return newFilename;
     }
 
     @Override
     public File downloadFile(String fileKey)
         throws IOException {
-        return null;
+        return new File(root + fileKey);
     }
 
     private static String getFileExtension(String filename) {
