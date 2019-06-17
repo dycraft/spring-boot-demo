@@ -3,7 +3,9 @@ package io.dycraft.samples.springbootdemo.model;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
@@ -11,7 +13,9 @@ import org.hibernate.annotations.GenerationTime;
  * @author Dayang Li on 17/06/2019
  */
 @MappedSuperclass
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
 public class BaseEntity {
 
     @Generated(GenerationTime.INSERT)

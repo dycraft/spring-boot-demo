@@ -5,8 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
@@ -14,7 +15,8 @@ import org.hibernate.annotations.GenerationTime;
  * @author Dayang Li on 12/06/2019
  */
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class User {
 
