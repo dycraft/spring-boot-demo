@@ -1,5 +1,6 @@
 package io.dycraft.samples.springbootdemo.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @author Dayang Li on 13/06/2019
  */
 @Configuration
+@RequiredArgsConstructor
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -25,14 +27,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
 
     private final PasswordEncoder passwordEncoder;
-
-    public WebSecurityConfig(JwtTokenProvider jwtTokenProvider,
-        UserDetailsService userDetailsService,
-        PasswordEncoder passwordEncoder) {
-        this.jwtTokenProvider = jwtTokenProvider;
-        this.userDetailsService = userDetailsService;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Bean
     @Override
@@ -55,11 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // No session will be created or used by spring security
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        // Disallow everything else..
+        // Entry points
         http.authorizeRequests()
             .antMatchers("/auth/sign-in").permitAll()
             .antMatchers("/auth/sign-up").permitAll()
 //            .antMatchers("/**").permitAll()
+            // Disallow everything else..
             .anyRequest().authenticated();
 
         // If a user try to access a resource without having enough permissions

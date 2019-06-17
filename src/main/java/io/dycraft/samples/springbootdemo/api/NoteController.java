@@ -51,14 +51,12 @@ public class NoteController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     void updateNote(@AuthenticationPrincipal Identity identity,
         @PathVariable Long id, @Valid @RequestBody NoteRequestDTO noteRequestDTO) {
         noteService.update(noteRequestDTO.toEntity(identity.getUserId(), id));
     }
 
     @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     void removeNote(@PathVariable Long id) {
         noteService.delete(id);
     }
