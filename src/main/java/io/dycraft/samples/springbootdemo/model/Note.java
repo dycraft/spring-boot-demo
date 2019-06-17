@@ -1,15 +1,11 @@
 package io.dycraft.samples.springbootdemo.model;
 
-import java.util.Date;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 
 /**
  * @author Dayang Li on 12/06/2019
@@ -17,7 +13,7 @@ import org.hibernate.annotations.GenerationTime;
 @Entity
 @Data
 @NoArgsConstructor
-public class Note {
+public class Note extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +24,4 @@ public class Note {
     private String title;
 
     private String content;
-
-    @Generated(GenerationTime.INSERT)
-    @Column(nullable = false, updatable = false)
-    private Date createdAt;
-
-    @Generated(GenerationTime.ALWAYS)
-    @Column(nullable = false)
-    private Date updatedAt;
 }
