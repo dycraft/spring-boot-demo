@@ -30,6 +30,7 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public Note create(Note note) {
+        note.setId(null);
         return noteRepository.save(note);
     }
 

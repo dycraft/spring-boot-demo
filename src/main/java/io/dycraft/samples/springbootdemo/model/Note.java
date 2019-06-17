@@ -1,6 +1,7 @@
 package io.dycraft.samples.springbootdemo.model;
 
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,8 +30,10 @@ public class Note {
     private String content;
 
     @Generated(GenerationTime.INSERT)
+    @Column(nullable = false, updatable = false)
     private Date createdAt;
 
     @Generated(GenerationTime.ALWAYS)
+    @Column(nullable = false)
     private Date updatedAt;
 }
